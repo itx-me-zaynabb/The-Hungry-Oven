@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <CustomCursor />
-      <Navbar/>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
