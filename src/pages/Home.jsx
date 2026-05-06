@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/purity */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
@@ -10,8 +11,8 @@ export default function Home() {
   useEffect(() => {
     const move = (e) => {
       const { innerWidth, innerHeight } = window;
-      mouseX.set((e.clientX / innerWidth - 0.5) * 30);
-      mouseY.set((e.clientY / innerHeight - 0.5) * 30);
+      mouseX.set((e.clientX / innerWidth - 0.5) * 20);
+      mouseY.set((e.clientY / innerHeight - 0.5) * 20);
     };
     window.addEventListener("mousemove", move);
     return () => window.removeEventListener("mousemove", move);
@@ -22,40 +23,47 @@ export default function Home() {
 
   return (
     <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
-      {/* ✅ SHARP BACKGROUND */}
+      {/* 🔥 ULTRA SHARP BACKGROUND */}
       <motion.div
         style={{
           x,
           y,
-          backgroundImage: "url('/images/bg.webp')",
+          backgroundImage: "url('/images/bgg.jpg')",
         }}
-        className="absolute inset-0 bg-cover bg-center scale-105"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform contrast-110 brightness-105"
       />
 
-      {/* ✅ LIGHT OVERLAY (so image stays visible) */}
-      <div className="absolute inset-0 bg-black/40" />
+      {/* 🎬 LIGHT OVERLAY (doesn't kill image) */}
+      <div className="absolute inset-0 bg-black/20" />
 
-      {/* ✨ SOFT GLOW EFFECT */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.15),transparent_60%)]" />
+      {/* 🎯 DEPTH GRADIENT (bottom only) */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
-      {/* 🍕 FLOATING PIZZAS (SMOOTH + AESTHETIC) */}
+      {/* 🍕 FLOATING PIZZAS */}
       <motion.img
-        src="/images/pizza.webp"
+        src="/images/pizza.jpg"
         className="absolute top-16 left-10 w-16 opacity-60"
         animate={{ y: [0, -15, 0], rotate: [0, 8, -8, 0] }}
         transition={{ duration: 7, repeat: Infinity }}
       />
 
       <motion.img
-        src="/images/pizza.webp"
+        src="/images/pizza.jpg"
         className="absolute bottom-20 right-16 w-20 opacity-50"
         animate={{ y: [0, 20, 0], rotate: [0, -10, 10, 0] }}
         transition={{ duration: 9, repeat: Infinity }}
       />
 
-      {/* ✨ PARTICLES (LESS = MORE PREMIUM) */}
+      <motion.img
+        src="/images/pizza.jpg"
+        className="absolute top-1/3 right-1/4 w-14 opacity-40"
+        animate={{ x: [0, 15, 0], y: [0, -10, 0] }}
+        transition={{ duration: 8, repeat: Infinity }}
+      />
+
+      {/* ✨ LIGHT PARTICLES */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(12)].map((_, i) => (
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1.5 h-1.5 bg-cheese rounded-full opacity-30"
@@ -75,13 +83,14 @@ export default function Home() {
         ))}
       </div>
 
-      {/* CONTENT */}
+      {/* 🔥 CONTENT */}
       <div className="relative z-10 px-6 max-w-3xl">
-        {/* HEADING */}
+        {/* TITLE */}
         <motion.h1
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-6xl md:text-8xl font-display text-cheese tracking-widest drop-shadow-xl"
+          transition={{ duration: 1 }}
+          className="text-6xl md:text-8xl font-display text-cheese tracking-widest drop-shadow-2xl"
         >
           The Hungry Oven
         </motion.h1>
@@ -102,18 +111,18 @@ export default function Home() {
           className="mt-6 text-lg md:text-2xl text-gray-200"
         />
 
-        {/* 🔥 PRO CTA BUTTON */}
+        {/* 🚀 PREMIUM CTA BUTTON */}
         <motion.button
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           whileHover={{
             scale: 1.1,
-            boxShadow: "0px 0px 25px rgba(251,191,36,0.8)",
+            boxShadow: "0px 0px 30px rgba(251,191,36,0.9)",
           }}
           whileTap={{ scale: 0.95 }}
           className="relative mt-10 px-10 py-3 rounded-full bg-cheese text-black font-semibold overflow-hidden"
         >
-          {/* Glow animation */}
+          {/* Glow layer */}
           <span className="absolute inset-0 bg-white/20 blur-xl opacity-0 hover:opacity-100 transition" />
           Order Now 🍕
         </motion.button>
