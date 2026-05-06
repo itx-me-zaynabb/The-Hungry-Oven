@@ -8,63 +8,63 @@ const menuData = [
     name: "Chicken Fajita Pizza",
     category: "pizza",
     price: 1499,
-    img: "/images/pizza1.jpg",
+    img: "/images/1.webp",
   },
   {
     id: 2,
     name: "BBQ Tikka Pizza",
     category: "pizza",
     price: 1599,
-    img: "/images/pizza2.jpg",
+    img: "/images/2.webp",
   },
   {
     id: 3,
     name: "Cheesy Pepperoni Pizza",
     category: "pizza",
     price: 1699,
-    img: "/images/pizza3.jpg",
+    img: "/images/3.webp",
   },
   {
     id: 4,
     name: "Creamy Alfredo Pasta",
     category: "pasta",
     price: 1199,
-    img: "/images/pasta1.jpg",
+    img: "/images/4.webp",
   },
   {
     id: 5,
     name: "Spicy Arrabiata Pasta",
     category: "pasta",
     price: 1099,
-    img: "/images/pasta2.jpg",
+    img: "/images/5.webp",
   },
   {
     id: 6,
     name: "Loaded Cheese Fries",
     category: "fries",
     price: 899,
-    img: "/images/fries1.jpg",
+    img: "/images/6.webp",
   },
   {
     id: 7,
     name: "Peri Peri Fries",
     category: "fries",
     price: 799,
-    img: "/images/fries2.jpg",
+    img: "/images/7.webp",
   },
   {
     id: 8,
     name: "Classic Cola Chill",
     category: "drinks",
     price: 299,
-    img: "/images/drink1.jpg",
+    img: "/images/8.webp",
   },
   {
     id: 9,
     name: "Strawberry Fizz Drink",
     category: "drinks",
     price: 349,
-    img: "/images/drink2.jpg",
+    img: "/images/9.webp",
   },
 ];
 
@@ -173,7 +173,7 @@ export default function Menu() {
                 <motion.button
                   whileTap={{ scale: 0.9 }}
                   onClick={() => addToCart(item)}
-                  className="mt-3 w-full py-2 rounded-xl bg-cheese text-yellow font-semibold hover:shadow-lg hover:shadow-cheese/40 transition"
+                  className="mt-3 w-full py-2 rounded-xl bg-cheese text-yellow-600 font-semibold hover:shadow-lg hover:shadow-cheese/40 transition"
                 >
                   Add to Cart 🍕
                 </motion.button>
