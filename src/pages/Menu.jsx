@@ -173,7 +173,7 @@ export default function Menu() {
                 <motion.button
                   whileTap={{ scale: 0.9 }}
                   onClick={() => addToCart(item)}
-                  className="mt-3 w-full py-2 rounded-xl bg-cheese text-black font-semibold hover:shadow-lg hover:shadow-cheese/40 transition"
+                  className="mt-3 w-full py-2 rounded-xl bg-cheese text-yellow font-semibold hover:shadow-lg hover:shadow-cheese/40 transition"
                 >
                   Add to Cart 🍕
                 </motion.button>
