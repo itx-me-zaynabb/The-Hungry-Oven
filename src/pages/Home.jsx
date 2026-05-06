@@ -28,7 +28,7 @@ export default function Home() {
         style={{
           x,
           y,
-          backgroundImage: "url('/images/bgg.jpg')",
+          backgroundImage: "url('/images/bgs.jpg')",
         }}
         className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform contrast-110 brightness-105"
       />
