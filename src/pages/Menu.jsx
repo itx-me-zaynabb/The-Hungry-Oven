@@ -3,19 +3,70 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 const menuData = [
-  { id: 1, name: "Chicken Fajita Pizza", category: "pizza", price: 1499 },
-  { id: 2, name: "BBQ Tikka Pizza", category: "pizza", price: 1599 },
-  { id: 3, name: "Creamy Alfredo Pasta", category: "pasta", price: 1199 },
-  { id: 4, name: "Spicy Cheese Fries", category: "fries", price: 899 },
-  { id: 5, name: "Cola Chill Drink", category: "drinks", price: 299 },
+  {
+    id: 1,
+    name: "Chicken Fajita Pizza",
+    category: "pizza",
+    price: 1499,
+    img: "/images/pizza1.jpg",
+  },
+  {
+    id: 2,
+    name: "BBQ Tikka Pizza",
+    category: "pizza",
+    price: 1599,
+    img: "/images/pizza2.jpg",
+  },
+  {
+    id: 3,
+    name: "Cheesy Pepperoni Pizza",
+    category: "pizza",
+    price: 1699,
+    img: "/images/pizza3.jpg",
+  },
+  {
+    id: 4,
+    name: "Creamy Alfredo Pasta",
+    category: "pasta",
+    price: 1199,
+    img: "/images/pasta1.jpg",
+  },
+  {
+    id: 5,
+    name: "Spicy Arrabiata Pasta",
+    category: "pasta",
+    price: 1099,
+    img: "/images/pasta2.jpg",
+  },
+  {
+    id: 6,
+    name: "Loaded Cheese Fries",
+    category: "fries",
+    price: 899,
+    img: "/images/fries1.jpg",
+  },
+  {
+    id: 7,
+    name: "Peri Peri Fries",
+    category: "fries",
+    price: 799,
+    img: "/images/fries2.jpg",
+  },
+  {
+    id: 8,
+    name: "Classic Cola Chill",
+    category: "drinks",
+    price: 299,
+    img: "/images/drink1.jpg",
+  },
+  {
+    id: 9,
+    name: "Strawberry Fizz Drink",
+    category: "drinks",
+    price: 349,
+    img: "/images/drink2.jpg",
+  },
 ];
-
-const icons = {
-  pizza: "🍕",
-  pasta: "🍝",
-  fries: "🍟",
-  drinks: "🥤",
-};
 
 export default function Menu() {
   const [filter, setFilter] = useState("all");
@@ -28,24 +79,22 @@ export default function Menu() {
 
   return (
     <section className="relative min-h-screen text-white overflow-hidden">
-      {/* 🌌 PIZZA WORLD BACKGROUND */}
+      {/* 🌌 BACKGROUND (KEEP YOUR ORIGINAL VIBE) */}
       <div className="absolute inset-0 bg-[url('/images/pizza-bg.jpg')] bg-cover bg-center scale-110 opacity-40" />
-
-      {/* DARK CINEMATIC LAYER */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black" />
 
-      {/* 🍕 FLOATING PIZZAS BACKGROUND ANIMATION */}
-      {[...Array(12)].map((_, i) => (
+      {/* 🍕 FLOATING PIZZAS (AESTHETIC LAYER) */}
+      {[...Array(10)].map((_, i) => (
         <motion.img
           key={i}
           src="/images/pizza.webp"
-          className="absolute w-10 opacity-30"
+          className="absolute w-10 opacity-20"
           style={{
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
           }}
           animate={{
-            y: [0, -30, 0],
+            y: [0, -25, 0],
             rotate: [0, 360],
           }}
           transition={{
@@ -64,12 +113,12 @@ export default function Menu() {
         The Hungry Universe 🍕
       </motion.h1>
 
-      {/* FLOATING CATEGORY ORBS (NEW STYLE) */}
+      {/* FILTERS */}
       <div className="relative flex justify-center gap-4 mt-12 flex-wrap">
         {["all", "pizza", "pasta", "fries", "drinks"].map((cat) => (
           <motion.button
             key={cat}
-            whileHover={{ scale: 1.2 }}
+            whileHover={{ scale: 1.15 }}
             onClick={() => setFilter(cat)}
             className={`px-6 py-2 rounded-full text-sm font-semibold backdrop-blur-xl border transition ${
               filter === cat
@@ -77,56 +126,64 @@ export default function Menu() {
                 : "bg-white/10 border-white/20"
             }`}
           >
-            {icons[cat] || "🍴"} {cat}
+            {cat}
           </motion.button>
         ))}
       </div>
 
-      {/* 🌟 FLOATING FOOD ITEMS (NOT CARDS) */}
-      <div className="relative mt-20 flex flex-wrap justify-center gap-12 px-6">
+      {/* 🍽 FOOD GRID (PREMIUM FLOATING STYLE) */}
+      <div className="relative mt-20 flex flex-wrap justify-center gap-10 px-6">
         {filtered.map((item, i) => (
           <motion.div
             key={item.id}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: i * 0.15 }}
+            initial={{ opacity: 0, y: 60, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: i * 0.1 }}
             whileHover={{
-              scale: 1.15,
-              rotate: 2,
+              scale: 1.12,
+              rotate: 1,
             }}
-            className="relative group cursor-pointer"
+            className="relative group w-64"
           >
-            {/* GLOW ORBIT */}
-            <div className="absolute inset-0 bg-cheese/20 blur-3xl opacity-0 group-hover:opacity-100 transition rounded-full" />
+            {/* GLOW */}
+            <div className="absolute inset-0 bg-cheese/20 blur-2xl opacity-0 group-hover:opacity-100 transition rounded-3xl" />
 
-            {/* FLOATING FOOD ICON */}
-            <div className="text-7xl text-center">{icons[item.category]}</div>
+            {/* TILE */}
+            <div className="relative bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl overflow-hidden shadow-lg">
+              {/* IMAGE */}
+              <div className="h-40 overflow-hidden">
+                <img
+                  src={item.img}
+                  alt={item.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                />
+              </div>
 
-            {/* NAME */}
-            <h2 className="text-center mt-3 text-lg font-semibold">
-              {item.name}
-            </h2>
+              {/* CONTENT */}
+              <div className="p-4 text-center">
+                {/* NAME */}
+                <h2 className="text-sm font-semibold">{item.name}</h2>
 
-            {/* PRICE BADGE */}
-            <div className="text-center mt-2">
-              <span className="px-4 py-1 bg-cheese text-black rounded-full text-sm font-bold">
-                Rs {item.price}
-              </span>
+                {/* PRICE */}
+                <div className="mt-2 text-cheese font-bold text-lg">
+                  Rs {item.price}
+                </div>
+
+                {/* BUTTON */}
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => addToCart(item)}
+                  className="mt-3 w-full py-2 rounded-xl bg-cheese text-black font-semibold hover:shadow-lg hover:shadow-cheese/40 transition"
+                >
+                  Add to Cart 🍕
+                </motion.button>
+              </div>
             </div>
-
-            {/* ADD BUTTON */}
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => addToCart(item)}
-              className="mt-4 px-5 py-2 bg-white/10 border border-white/20 rounded-full hover:bg-cheese hover:text-black transition w-full"
-            >
-              Add 🍕
-            </motion.button>
           </motion.div>
         ))}
       </div>
 
-      {/* 🛒 FLOATING CART ORB */}
+      {/* 🛒 CART FLOAT */}
       <div className="fixed bottom-6 right-6 bg-cheese text-black px-5 py-3 rounded-full shadow-lg font-bold">
         🛒 {cart.length}
       </div>
