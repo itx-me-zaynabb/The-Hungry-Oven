@@ -79,11 +79,11 @@ export default function Menu() {
 
   return (
     <section className="relative min-h-screen text-white overflow-hidden">
-      {/* 🌌 BACKGROUND (KEEP YOUR ORIGINAL VIBE) */}
+      {/* 🌌 BACKGROUND (UNCHANGED) */}
       <div className="absolute inset-0 bg-[url('/images/pizza-bg.jpg')] bg-cover bg-center scale-110 opacity-40" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black" />
+      <div className="absolute inset-0 bg-linear-to-b from-black via-black/80 to-black" />
 
-      {/* 🍕 FLOATING PIZZAS (AESTHETIC LAYER) */}
+      {/* 🍕 FLOATING PIZZAS */}
       {[...Array(10)].map((_, i) => (
         <motion.img
           key={i}
@@ -113,25 +113,31 @@ export default function Menu() {
         The Hungry Universe 🍕
       </motion.h1>
 
-      {/* FILTERS */}
+      {/* FILTER BUTTONS (GLOW UPGRADE) */}
       <div className="relative flex justify-center gap-4 mt-12 flex-wrap">
         {["all", "pizza", "pasta", "fries", "drinks"].map((cat) => (
           <motion.button
             key={cat}
-            whileHover={{ scale: 1.15 }}
             onClick={() => setFilter(cat)}
-            className={`px-6 py-2 rounded-full text-sm font-semibold backdrop-blur-xl border transition ${
+            whileHover={{
+              scale: 1.15,
+              boxShadow: "0px 0px 25px rgba(251,191,36,0.6)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            className={`relative px-6 py-2 rounded-full text-sm font-semibold backdrop-blur-xl border overflow-hidden transition ${
               filter === cat
                 ? "bg-cheese text-black"
                 : "bg-white/10 border-white/20"
             }`}
           >
-            {cat}
+            {/* glow aura */}
+            <span className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.4),transparent_60%)] opacity-0 hover:opacity-100 transition" />
+            <span className="relative z-10">{cat}</span>
           </motion.button>
         ))}
       </div>
 
-      {/* 🍽 FOOD GRID (PREMIUM FLOATING STYLE) */}
+      {/* 🍽 FOOD ITEMS */}
       <div className="relative mt-20 flex flex-wrap justify-center gap-10 px-6">
         {filtered.map((item, i) => (
           <motion.div
@@ -139,18 +145,15 @@ export default function Menu() {
             initial={{ opacity: 0, y: 60, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: i * 0.1 }}
-            whileHover={{
-              scale: 1.12,
-              rotate: 1,
-            }}
+            whileHover={{ scale: 1.12, rotate: 1 }}
             className="relative group w-64"
           >
-            {/* GLOW */}
+            {/* glow */}
             <div className="absolute inset-0 bg-cheese/20 blur-2xl opacity-0 group-hover:opacity-100 transition rounded-3xl" />
 
-            {/* TILE */}
+            {/* card */}
             <div className="relative bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl overflow-hidden shadow-lg">
-              {/* IMAGE */}
+              {/* image */}
               <div className="h-40 overflow-hidden">
                 <img
                   src={item.img}
@@ -159,23 +162,28 @@ export default function Menu() {
                 />
               </div>
 
-              {/* CONTENT */}
+              {/* content */}
               <div className="p-4 text-center">
-                {/* NAME */}
                 <h2 className="text-sm font-semibold">{item.name}</h2>
 
-                {/* PRICE */}
                 <div className="mt-2 text-cheese font-bold text-lg">
                   Rs {item.price}
                 </div>
 
-                {/* BUTTON */}
+                {/* BUTTON (GLOW + FLOAT) */}
                 <motion.button
-                  whileTap={{ scale: 0.9 }}
+                  whileHover={{
+                    scale: 1.08,
+                    boxShadow: "0px 0px 20px rgba(251,191,36,0.7)",
+                  }}
+                  whileTap={{ scale: 0.92 }}
+                  animate={{ y: [0, -2, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
                   onClick={() => addToCart(item)}
-                  className="mt-3 w-full py-2 rounded-xl bg-cheese text-yellow-600 font-semibold hover:shadow-lg hover:shadow-cheese/40 transition"
+                  className="relative mt-3 w-full py-2 rounded-xl bg-cheese text-black font-semibold overflow-hidden"
                 >
-                  Add to Cart 🍕
+                  <span className="absolute inset-0 bg-white/20 blur-xl opacity-0 hover:opacity-100 transition" />
+                  <span className="relative z-10">Add to Cart 🍕</span>
                 </motion.button>
               </div>
             </div>
@@ -183,10 +191,15 @@ export default function Menu() {
         ))}
       </div>
 
-      {/* 🛒 CART FLOAT */}
-      <div className="fixed bottom-6 right-6 bg-cheese text-black px-5 py-3 rounded-full shadow-lg font-bold">
+      {/* 🛒 CART ORB (BREATHING ANIMATION) */}
+      <motion.div
+        initial={{ scale: 0.8 }}
+        animate={{ scale: [1, 1.05, 1] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+        className="fixed bottom-6 right-6 bg-cheese text-black px-5 py-3 rounded-full shadow-lg font-bold"
+      >
         🛒 {cart.length}
-      </div>
+      </motion.div>
     </section>
   );
 }
