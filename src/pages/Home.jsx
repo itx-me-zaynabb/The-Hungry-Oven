@@ -4,11 +4,11 @@ export default function Home() {
   return (
     <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
       {/* Background Image (ADD YOUR IMAGE HERE) */}
-      backgroundImage: "url('/images/pizza bg.webp')"
+      backgroundImage: "url('/images/bg.webp')"
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/images/pizza bg.webp')",
+          backgroundImage: "url('/images/bg.webp')",
         }}
       ></div>
       {/* Dark Overlay + Blur */}
@@ -16,6 +16,10 @@ export default function Home() {
       {/* Floating Pizza Effect (optional placeholder) */}
       <div className="absolute inset-0 opacity-20">
         {/* later we can add small pizza PNGs floating */}
+        <img
+          src="/images/pizza.webp"
+          className="absolute top-10 left-10 w-16 animate-bounce"
+        />
       </div>
       {/* Content */}
       <div className="relative z-10 px-6">
