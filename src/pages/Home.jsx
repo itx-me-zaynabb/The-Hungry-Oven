@@ -18,7 +18,7 @@ export default function Home() {
       <div className="absolute inset-0 pointer-events-none">
         {/* Pizza 1 */}
         <motion.img
-          src="/images/pizza.webp"
+          src="/images/pizza.jpg"
           className="absolute top-10 left-10 w-16 opacity-70"
           animate={{ y: [0, -20, 0], rotate: [0, 10, -10, 0] }}
           transition={{ duration: 6, repeat: Infinity }}
@@ -26,7 +26,7 @@ export default function Home() {
 
         {/* Pizza 2 */}
         <motion.img
-          src="/images/pizza.webp"
+          src="/images/pizza.jpg"
           className="absolute bottom-20 right-10 w-20 opacity-60"
           animate={{ y: [0, 25, 0], rotate: [0, -15, 15, 0] }}
           transition={{ duration: 8, repeat: Infinity }}
@@ -34,7 +34,7 @@ export default function Home() {
 
         {/* Pizza 3 */}
         <motion.img
-          src="/images/pizza.webp"
+          src="/images/pizza.jpg"
           className="absolute top-1/3 right-1/4 w-14 opacity-50"
           animate={{ x: [0, 20, 0], y: [0, -15, 0] }}
           transition={{ duration: 7, repeat: Infinity }}
@@ -42,7 +42,7 @@ export default function Home() {
 
         {/* Pizza 4 */}
         <motion.img
-          src="/images/pizza.webp"
+          src="/images/pizza.jpg"
           className="absolute bottom-1/3 left-1/4 w-18 opacity-40"
           animate={{ x: [0, -20, 0], rotate: [0, 20, -20, 0] }}
           transition={{ duration: 9, repeat: Infinity }}
