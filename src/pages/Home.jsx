@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/purity */
 /* eslint-disable react-hooks/exhaustive-deps */
+
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
@@ -11,10 +12,13 @@ export default function Home() {
   useEffect(() => {
     const move = (e) => {
       const { innerWidth, innerHeight } = window;
+
       mouseX.set((e.clientX / innerWidth - 0.5) * 20);
       mouseY.set((e.clientY / innerHeight - 0.5) * 20);
     };
+
     window.addEventListener("mousemove", move);
+
     return () => window.removeEventListener("mousemove", move);
   }, []);
 
@@ -22,7 +26,7 @@ export default function Home() {
   const y = useTransform(mouseY, (v) => v);
 
   return (
-    <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center text-center overflow-hidden px-4">
       {/* 🔥 ULTRA SHARP BACKGROUND */}
       <motion.div
         style={{
@@ -30,35 +34,77 @@ export default function Home() {
           y,
           backgroundImage: "url('/images/bgs.jpg')",
         }}
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform contrast-110 brightness-105"
+        className="
+          absolute inset-0
+          bg-cover bg-center bg-no-repeat
+          will-change-transform
+          contrast-110 brightness-105
+          scale-110
+        "
       />
 
-      {/* 🎬 LIGHT OVERLAY (doesn't kill image) */}
+      {/* 🎬 LIGHT OVERLAY */}
       <div className="absolute inset-0 bg-black/20" />
 
-      {/* 🎯 DEPTH GRADIENT (bottom only) */}
+      {/* 🎯 DEPTH GRADIENT */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
       {/* 🍕 FLOATING PIZZAS */}
       <motion.img
         src="/images/pizza.jpg"
-        className="absolute top-16 left-10 w-16 opacity-60"
-        animate={{ y: [0, -15, 0], rotate: [0, 8, -8, 0] }}
-        transition={{ duration: 7, repeat: Infinity }}
+        className="
+          absolute
+          top-10 left-3
+          sm:top-16 sm:left-10
+          w-12 sm:w-16
+          opacity-60
+        "
+        animate={{
+          y: [0, -15, 0],
+          rotate: [0, 8, -8, 0],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+        }}
       />
 
       <motion.img
         src="/images/pizza.jpg"
-        className="absolute bottom-20 right-16 w-20 opacity-50"
-        animate={{ y: [0, 20, 0], rotate: [0, -10, 10, 0] }}
-        transition={{ duration: 9, repeat: Infinity }}
+        className="
+          absolute
+          bottom-16 right-4
+          sm:bottom-20 sm:right-16
+          w-14 sm:w-20
+          opacity-50
+        "
+        animate={{
+          y: [0, 20, 0],
+          rotate: [0, -10, 10, 0],
+        }}
+        transition={{
+          duration: 9,
+          repeat: Infinity,
+        }}
       />
 
       <motion.img
         src="/images/pizza.jpg"
-        className="absolute top-1/3 right-1/4 w-14 opacity-40"
-        animate={{ x: [0, 15, 0], y: [0, -10, 0] }}
-        transition={{ duration: 8, repeat: Infinity }}
+        className="
+          absolute
+          top-1/3 right-[10%]
+          sm:right-1/4
+          w-10 sm:w-14
+          opacity-40
+        "
+        animate={{
+          x: [0, 15, 0],
+          y: [0, -10, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+        }}
       />
 
       {/* ✨ LIGHT PARTICLES */}
@@ -84,13 +130,24 @@ export default function Home() {
       </div>
 
       {/* 🔥 CONTENT */}
-      <div className="relative z-10 px-6 max-w-3xl">
+      <div className="relative z-10 px-4 sm:px-6 max-w-3xl">
         {/* TITLE */}
         <motion.h1
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-6xl md:text-8xl font-display text-cheese tracking-widest drop-shadow-2xl"
+          className="
+            text-4xl
+            sm:text-5xl
+            md:text-7xl
+            lg:text-8xl
+            font-display
+            text-cheese
+            tracking-wide
+            md:tracking-widest
+            drop-shadow-2xl
+            leading-tight
+          "
         >
           The Hungry Oven
         </motion.h1>
@@ -108,7 +165,13 @@ export default function Home() {
           wrapper="p"
           speed={50}
           repeat={Infinity}
-          className="mt-6 text-lg md:text-2xl text-gray-200"
+          className="
+            mt-4 sm:mt-6
+            text-sm
+            sm:text-lg
+            md:text-2xl
+            text-gray-200
+          "
         />
 
         {/* 🚀 PREMIUM CTA BUTTON */}
@@ -116,15 +179,27 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           whileHover={{
-            scale: 1.1,
+            scale: 1.08,
             boxShadow: "0px 0px 30px rgba(251,191,36,0.9)",
           }}
           whileTap={{ scale: 0.95 }}
-          className="relative mt-10 px-10 py-3 rounded-full bg-cheese text-black font-semibold overflow-hidden"
+          className="
+            relative
+            mt-8 sm:mt-10
+            px-7 sm:px-10
+            py-3
+            rounded-full
+            bg-cheese
+            text-black
+            font-semibold
+            text-sm sm:text-base
+            overflow-hidden
+          "
         >
           {/* Glow layer */}
           <span className="absolute inset-0 bg-white/20 blur-xl opacity-0 hover:opacity-100 transition" />
-          Order Now 🍕
+
+          <span className="relative z-10">Order Now 🍕</span>
         </motion.button>
       </div>
     </section>
