@@ -180,7 +180,7 @@ export default function Contact() {
                 "
               >
                 <img
-                  src="/images/map.webp"
+                  src="/images/location.webp"
                   alt="map"
                   className="w-full h-full object-cover"
                 />
