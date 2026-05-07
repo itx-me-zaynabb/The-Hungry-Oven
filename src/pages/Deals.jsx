@@ -35,7 +35,7 @@ export default function Deals() {
       </div>
 
       {/* 🧡 CINEMATIC OVERLAY */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#2c1207]/85 via-[#1a0d08]/70 to-black/90" />
+      <div className="absolute inset-0 bg-linear-to-br from-[#2c1207]/85 via-[#1a0d08]/70 to-black/90" />
 
       {/* ✨ SOFT ORANGE LIGHTS */}
       <div className="absolute inset-0 overflow-hidden">
@@ -110,7 +110,7 @@ export default function Deals() {
           crafted for every foodie craving.
         </p>
 
-        <div className="w-28 h-[3px] rounded-full bg-[#ff9d2f] mx-auto mt-5 opacity-70" />
+        <div className="w-28 h-0.75 rounded-full bg-[#ff9d2f] mx-auto mt-5 opacity-70" />
       </motion.div>
 
       {/* 🍕 DEALS GRID */}
@@ -125,7 +125,7 @@ export default function Deals() {
               y: -8,
               scale: 1.02,
             }}
-            className="group relative overflow-hidden rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-xl"
+            className="group relative overflow-hidden rounded-4xl border border-white/10 bg-white/5 backdrop-blur-xl"
           >
             {/* ✨ HOVER GLOW */}
             <div className="absolute inset-0 bg-[#ff9d2f]/0 group-hover:bg-[#ff9d2f]/5 transition duration-500" />
