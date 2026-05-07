@@ -1,16 +1,85 @@
-# React + Vite
+# 🍕 The Hungry Oven
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and cinematic restaurant web application designed with immersive UI, smooth animations, glowing effects, and a premium user experience.
 
-Currently, two official plugins are available:
+Built using React, Tailwind CSS, Framer Motion, and React Router DOM.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Live Experience
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The Hungry Oven is not just a food website — it’s a complete animated restaurant experience.
 
-## Expanding the ESLint configuration
+From floating pizzas and cinematic backgrounds to glowing cards and interactive cart functionality, every section is designed to feel premium, modern, and visually engaging.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+# 🚀 Features
+
+### 🍕 Modern Hero Section
+- Cinematic fullscreen landing page
+- Mouse movement parallax effect
+- Animated floating food elements
+- Dynamic typing text animation
+- Premium CTA buttons
+
+### 🍽 Interactive Menu
+- Category filtering system
+- Animated food cards
+- Add to cart functionality
+- Responsive grid layout
+- Smooth hover interactions
+- Glassmorphism UI
+
+### 🛒 Cart System
+- Dynamic cart updates
+- Floating cart button
+- Cart page navigation
+- Real-time item count
+
+### 🔥 Premium UI Effects
+- Glow effects
+- Floating particles
+- Animated gradients
+- Framer Motion animations
+- Blur glass backgrounds
+- Smooth transitions
+
+### 📱 Fully Responsive
+- Mobile optimized
+- Tablet responsive
+- Desktop cinematic layout
+- Adaptive spacing & typography
+
+---
+
+# 🛠 Tech Stack
+
+| Technology | Usage |
+|------------|-------|
+| React.js | Frontend Framework |
+| Tailwind CSS | Styling |
+| Framer Motion | Animations |
+| React Router DOM | Routing |
+| React Type Animation | Typing Effects |
+
+---
+
+# 📂 Project Structure
+
+```bash
+src/
+│
+├── components/
+│   ├── Navbar.jsx
+│   
+│
+├── pages/
+│   ├── Home.jsx
+│   ├── Menu.jsx
+│   ├── Deals.jsx
+│   ├── Contact.jsx
+    ├── Cart.jsx
+│
+├── App.jsx
+├── main.jsx
