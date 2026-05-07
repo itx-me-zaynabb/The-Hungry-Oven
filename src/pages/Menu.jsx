@@ -345,7 +345,7 @@ export default function Menu() {
           </p>
         </motion.div>
       </div>
-
+      <Cart cartItems={cart} setCart={setCart} />
       {/* 🛒 FLOATING CART */}
       <motion.div
         animate={{
