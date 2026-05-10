@@ -37,88 +37,123 @@ const menuData = [
     name: "Chicken Supreme Pizza",
     category: "pizza",
     price: 1750,
-    img: "/images/1.webp",
+    img: "/images/15.webp",
+  },
+  {
+    id: 6,
+    name: "Smoky BBQ Chicken Pizza",
+    category: "pizza",
+    price: 1650,
+    img: "/images/14.webp",
   },
 
   // 🍝 PASTA
   {
-    id: 6,
+    id: 7,
     name: "Creamy Alfredo Pasta",
     category: "pasta",
     price: 1199,
     img: "/images/4.webp",
   },
   {
-    id: 7,
+    id: 8,
     name: "Spicy Arrabiata Pasta",
     category: "pasta",
     price: 1099,
     img: "/images/5.webp",
   },
   {
-    id: 8,
+    id: 9,
     name: "Chicken White Sauce Pasta",
     category: "pasta",
     price: 1299,
-    img: "/images/4.webp",
+    img: "/images/17.webp",
+  },
+  {
+    id: 10,
+    name: "Cheesy Garlic Pasta",
+    category: "pasta",
+    price: 1350,
+    img: "/images/16.webp",
   },
 
   // 🍟 FRIES
   {
-    id: 9,
+    id: 11,
     name: "Loaded Cheese Fries",
     category: "fries",
     price: 899,
     img: "/images/6.webp",
   },
   {
-    id: 10,
+    id: 12,
     name: "Peri Peri Fries",
     category: "fries",
     price: 799,
     img: "/images/7.webp",
   },
   {
-    id: 11,
+    id: 13,
     name: "Garlic Mayo Fries",
     category: "fries",
     price: 850,
+    img: "/images/18.webp",
+  },
+  {
+    id: 14,
+    name: "Cheesy Volcano Fries",
+    category: "fries",
+    price: 999,
     img: "/images/6.webp",
   },
 
   // 🍗 HOT WINGS
   {
-    id: 12,
+    id: 15,
     name: "Spicy Hot Wings (6 pcs)",
     category: "wings",
     price: 999,
     img: "/images/10.webp",
   },
   {
-    id: 13,
-    name: "BBQ Hot Wings (8 pcs)",
+    id: 16,
+    name: "BBQ Smoky Wings (8 pcs)",
     category: "wings",
     price: 1199,
     img: "/images/11.webp",
   },
   {
-    id: 14,
+    id: 17,
     name: "Extra Crispy Wings",
     category: "wings",
     price: 1099,
     img: "/images/12.webp",
   },
+  {
+    id: 18,
+    name: "Garlic Parmesan Wings",
+    category: "wings",
+    price: 1299,
+    img: "/images/13.webp",
+  },
+  {
+    id: 19,
+    name: "Honey Glazed Wings",
+    category: "wings",
+    price: 1399,
+    img: "/images/10.webp",
+  },
 
   // 🥤 DRINKS
   {
-    id: 15,
+    id: 20,
     name: "Classic Cola Chill",
     category: "drinks",
     price: 299,
     img: "/images/8.webp",
   },
   {
-    id: 16,
+    id: 21,
     name: "Strawberry Fizz Drink",
     category: "drinks",
     price: 349,
@@ -134,108 +169,296 @@ export default function Menu() {
 
   return (
     <section className="relative min-h-screen overflow-hidden text-white">
-      {/* BACKGROUND (FIXED RESPONSIVE VISIBILITY) */}
-      <div className="absolute inset-0 bg-[url('/images/pizza-bg.jpg')] bg-cover bg-center md:bg-[length:110%] bg-[length:150%] scale-110 md:scale-105 brightness-110 contrast-110" />
+      {/* 🌄 BACKGROUND */}
+      <div className="absolute inset-0 overflow-hidden">
+        <img
+          src="/images/pizza-bg.jpg"
+          alt="background"
+          className="
+            w-full
+            h-full
+            object-cover
+            scale-105
+            md:scale-110
+            brightness-125
+            contrast-125
+            saturate-150
+          "
+        />
+      </div>
 
-      {/* ORANGE GLOW */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,140,0,0.35),transparent_55%)]" />
+      {/* 🔥 OVERLAYS */}
+      <div className="absolute inset-0 bg-black/45 md:bg-black/50" />
 
-      {/* DARK OVERLAY */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/65 to-black/90" />
+      <div
+        className="
+          absolute inset-0
+          bg-[radial-gradient(circle_at_top,rgba(255,140,0,0.30),transparent_60%)]
+        "
+      />
 
-      {/* FLOATING ELEMENTS */}
-      {[...Array(8)].map((_, i) => (
+      <div
+        className="
+          absolute inset-0
+          bg-gradient-to-b
+          from-black/20
+          via-black/30
+          to-black/70
+        "
+      />
+
+      {/* 🍕 FLOATING PIZZAS */}
+      {[...Array(10)].map((_, i) => (
         <motion.img
           key={i}
           src="/images/pizza.webp"
-          className="absolute opacity-15 w-14 md:w-20"
+          className="
+            absolute
+            opacity-20
+            w-10
+            sm:w-14
+            md:w-20
+          "
           style={{
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
           }}
-          animate={{ y: [0, -15, 0], rotate: [0, 15, -15, 0] }}
-          transition={{ duration: 8, repeat: Infinity }}
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 15, -15, 0],
+          }}
+          transition={{
+            duration: 8 + i,
+            repeat: Infinity,
+          }}
         />
       ))}
+
+      {/* ✨ PARTICLES */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="
+              absolute
+              w-1.5
+              h-1.5
+              bg-orange-400
+              rounded-full
+              opacity-40
+            "
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -25, 0],
+              opacity: [0.2, 0.7, 0.2],
+            }}
+            transition={{
+              duration: 5 + Math.random() * 4,
+              repeat: Infinity,
+            }}
+          />
+        ))}
+      </div>
 
       {/* CONTENT */}
       <div className="relative z-10 px-4 sm:px-6 lg:px-10 py-20">
         {/* HEADER */}
-        <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-orange-400 drop-shadow-[0_0_25px_rgba(255,140,0,0.7)]">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center"
+        >
+          <h1
+            className="
+              text-4xl
+              sm:text-5xl
+              md:text-7xl
+              font-black
+              text-orange-400
+              drop-shadow-[0_0_25px_rgba(255,140,0,0.8)]
+            "
+          >
             The Hungry Universe 🍕
           </h1>
 
-          <p className="mt-4 text-orange-100/80">
-            Crafted Flavors • Premium Ingredients • Bold Taste Experience
+          <p className="mt-4 text-sm sm:text-base text-orange-100/90">
+            Pizza • Pasta • Fries • Hot Wings • Drinks
           </p>
-        </div>
+        </motion.div>
 
         {/* FILTERS */}
         <div className="flex flex-wrap justify-center gap-3 mt-12">
           {["all", "pizza", "pasta", "fries", "wings", "drinks"].map((cat) => (
-            <button
+            <motion.button
               key={cat}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0px 0px 20px rgba(255,140,0,0.5)",
+              }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setFilter(cat)}
-              className={`px-5 py-2 rounded-full border text-sm transition ${
-                filter === cat
-                  ? "bg-orange-400 text-black"
-                  : "bg-white/10 border-white/20"
-              }`}
+              className={`
+                px-5 py-2.5
+                rounded-full
+                border
+                text-sm
+                transition-all
+                duration-300
+                backdrop-blur-xl
+                ${
+                  filter === cat
+                    ? "bg-orange-400 text-black border-orange-300"
+                    : "bg-white/10 border-white/20 text-white hover:bg-orange-400/20"
+                }
+              `}
             >
               {cat}
-            </button>
+            </motion.button>
           ))}
         </div>
 
         {/* GRID */}
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
-          {filtered.map((item) => (
+        <div
+          className="
+            mt-16
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-3
+            xl:grid-cols-4
+            gap-8
+            max-w-7xl
+            mx-auto
+          "
+        >
+          {filtered.map((item, i) => (
             <motion.div
               key={item.id}
-              whileHover={{ y: -8 }}
-              className="relative bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[30px] overflow-hidden"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
+              whileHover={{
+                y: -10,
+              }}
+              className="group relative"
             >
-              <img src={item.img} className="h-52 w-full object-cover" />
+              {/* CARD GLOW */}
+              <div
+                className="
+                  absolute inset-0
+                  bg-orange-400/20
+                  blur-3xl
+                  opacity-0
+                  group-hover:opacity-100
+                  transition
+                  duration-500
+                  rounded-[35px]
+                "
+              />
 
-              <div className="p-5 text-center">
-                <p className="text-orange-300 text-xs uppercase">
-                  {item.category}
-                </p>
+              {/* CARD */}
+              <div
+                className="
+                  relative
+                  bg-white/5
+                  backdrop-blur-2xl
+                  border
+                  border-white/10
+                  rounded-[30px]
+                  overflow-hidden
+                "
+              >
+                {/* IMAGE */}
+                <div className="overflow-hidden h-52">
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    className="
+                      w-full
+                      h-full
+                      object-cover
+                      group-hover:scale-110
+                      transition
+                      duration-700
+                    "
+                  />
+                </div>
 
-                <h2 className="mt-2 text-lg font-bold">{item.name}</h2>
+                {/* CONTENT */}
+                <div className="p-5 text-center">
+                  <p className="text-orange-300 text-xs uppercase tracking-[3px]">
+                    {item.category}
+                  </p>
 
-                <span className="mt-3 inline-block px-4 py-1 bg-orange-400/20 text-orange-300 rounded-full text-sm">
-                  Rs {item.price}
-                </span>
+                  <h2 className="mt-2 text-lg font-bold">{item.name}</h2>
+
+                  <span
+                    className="
+                      mt-4
+                      inline-block
+                      px-4
+                      py-1.5
+                      rounded-full
+                      bg-orange-400/20
+                      text-orange-300
+                      text-sm
+                      font-semibold
+                      border
+                      border-orange-400/20
+                    "
+                  >
+                    Rs {item.price}
+                  </span>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* PREMIUM NOTE (IMPROVED ONLY TEXT) */}
-        <div className="mt-24 text-center max-w-3xl mx-auto">
-          <div className="relative p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl overflow-hidden">
-            <div className="absolute inset-0 bg-orange-500/10 blur-3xl" />
+        {/* ✨ NOTE */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="
+            relative
+            mt-24
+            max-w-3xl
+            mx-auto
+            text-center
+          "
+        >
+          <div className="absolute inset-0 bg-orange-500/10 blur-3xl rounded-3xl" />
 
-            <div className="relative">
-              <h2 className="text-3xl text-orange-300 font-bold">
-                A Premium Taste Experience
-              </h2>
+          <div
+            className="
+              relative
+              p-6
+              sm:p-8
+              rounded-3xl
+              border
+              border-white/10
+              bg-white/5
+              backdrop-blur-xl
+            "
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-orange-300">
+              A Premium Taste Experience
+            </h2>
 
-              <p className="mt-4 text-white/75 leading-7">
-                Every dish is freshly prepared with high-quality ingredients,
-                rich flavors, and perfect seasoning. From pizzas to pastas,
-                crispy fries to spicy wings — every item is crafted to deliver a
-                premium and unforgettable dining experience.
-              </p>
+            <p className="mt-4 text-white/75 leading-7 text-sm sm:text-base">
+              Crafted with fire-baked perfection, rich flavors, and premium
+              ingredients — every bite is designed to deliver an unforgettable
+              experience.
+            </p>
 
-              <div className="mt-6 text-orange-200/70 text-sm">
-                Fresh • Hygienic • Premium Quality • Chef Crafted
-              </div>
+            <div className="mt-5 text-orange-200/70 text-sm">
+              🍕 Hot & Fresh • 🚚 Fast Delivery • 🔥 Premium Quality
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
