@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/purity */
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 
 const menuData = [
   // 🍕 PIZZAS
@@ -87,27 +86,27 @@ const menuData = [
     img: "/images/6.webp",
   },
 
-  // 🍗 HOT WINGS (NEW SECTION)
+  // 🍗 HOT WINGS
   {
     id: 12,
     name: "Spicy Hot Wings (6 pcs)",
     category: "wings",
     price: 999,
-    img: "/images/volcano.webp",
+    img: "/images/10.webp",
   },
   {
     id: 13,
     name: "BBQ Hot Wings (8 pcs)",
     category: "wings",
     price: 1199,
-    img: "/images/volcano.webp",
+    img: "/images/11.webp",
   },
   {
     id: 14,
     name: "Extra Crispy Wings",
     category: "wings",
     price: 1099,
-    img: "/images/volcano.webp",
+    img: "/images/12.webp",
   },
 
   // 🥤 DRINKS
@@ -129,7 +128,6 @@ const menuData = [
 
 export default function Menu() {
   const [filter, setFilter] = useState("all");
-  const navigate = useNavigate();
 
   const filtered =
     filter === "all" ? menuData : menuData.filter((i) => i.category === filter);
@@ -138,7 +136,6 @@ export default function Menu() {
     <section className="relative min-h-screen overflow-hidden text-white">
       {/* BACKGROUND */}
       <div className="absolute inset-0 bg-[url('/images/pizza-bg.jpg')] bg-cover bg-center scale-125 brightness-110 contrast-110" />
-
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,140,0,0.35),transparent_55%)]" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/65 to-black/90" />
 
@@ -166,7 +163,7 @@ export default function Menu() {
           </h1>
 
           <p className="mt-4 text-orange-100/80">
-            Pizza • Pasta • Fries • Hot Wings • Drinks
+            Crafted Flavors • Premium Ingredients • Bold Taste Experience
           </p>
         </div>
 
@@ -212,29 +209,25 @@ export default function Menu() {
           ))}
         </div>
 
-        {/* NOTE */}
-        <div className="mt-24 text-center max-w-3xl mx-auto">
-          <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl">
-            <h2 className="text-3xl text-orange-300 font-bold">
-              Fresh Fire Kitchen 🔥
-            </h2>
-            <p className="mt-4 text-white/70">
-              Pizza, Pasta, Fries & Hot Wings — sab kuch freshly cooked with
-              premium taste.
-            </p>
+       {/* ✨ BOTTOM NOTE */}
+<div className="mt-24 text-center max-w-3xl mx-auto">
+  <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl">
+    
+    <h2 className="text-3xl text-orange-300 font-bold">
+      Fresh Fire Kitchen 🔥
+    </h2>
+
+    <p className="mt-4 text-white/70 leading-8">
+      Every item is freshly prepared with premium ingredients, rich flavors,
+      and perfect seasoning. From pizzas to pastas, fries, and hot wings —
+      everything is crafted to deliver a high-quality dining experience straight from our kitchen to your table.
+    </p>
+
+  </div>
+</div>
           </div>
         </div>
       </div>
-
-      {/* CART ICON (UNCHANGED) */}
-      <motion.div
-        onClick={() => navigate("/cart")}
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-        className="fixed bottom-5 right-5 bg-gradient-to-r from-orange-400 to-yellow-400 text-black px-5 py-3 rounded-full font-bold cursor-pointer"
-      >
-        🛒 Cart
-      </motion.div>
     </section>
   );
 }
