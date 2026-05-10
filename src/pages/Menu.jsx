@@ -134,9 +134,13 @@ export default function Menu() {
 
   return (
     <section className="relative min-h-screen overflow-hidden text-white">
-      {/* BACKGROUND */}
-      <div className="absolute inset-0 bg-[url('/images/pizza-bg.jpg')] bg-cover bg-center scale-125 brightness-110 contrast-110" />
+      {/* BACKGROUND (FIXED RESPONSIVE VISIBILITY) */}
+      <div className="absolute inset-0 bg-[url('/images/pizza-bg.jpg')] bg-cover bg-center md:bg-[length:110%] bg-[length:150%] scale-110 md:scale-105 brightness-110 contrast-110" />
+
+      {/* ORANGE GLOW */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,140,0,0.35),transparent_55%)]" />
+
+      {/* DARK OVERLAY */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/65 to-black/90" />
 
       {/* FLOATING ELEMENTS */}
@@ -209,22 +213,27 @@ export default function Menu() {
           ))}
         </div>
 
-       {/* ✨ BOTTOM NOTE */}
-<div className="mt-24 text-center max-w-3xl mx-auto">
-  <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl">
-    
-    <h2 className="text-3xl text-orange-300 font-bold">
-      Fresh Fire Kitchen 🔥
-    </h2>
+        {/* PREMIUM NOTE (IMPROVED ONLY TEXT) */}
+        <div className="mt-24 text-center max-w-3xl mx-auto">
+          <div className="relative p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl overflow-hidden">
+            <div className="absolute inset-0 bg-orange-500/10 blur-3xl" />
 
-    <p className="mt-4 text-white/70 leading-8">
-      Every item is freshly prepared with premium ingredients, rich flavors,
-      and perfect seasoning. From pizzas to pastas, fries, and hot wings —
-      everything is crafted to deliver a high-quality dining experience straight from our kitchen to your table.
-    </p>
+            <div className="relative">
+              <h2 className="text-3xl text-orange-300 font-bold">
+                A Premium Taste Experience
+              </h2>
 
-  </div>
-</div>
+              <p className="mt-4 text-white/75 leading-7">
+                Every dish is freshly prepared with high-quality ingredients,
+                rich flavors, and perfect seasoning. From pizzas to pastas,
+                crispy fries to spicy wings — every item is crafted to deliver a
+                premium and unforgettable dining experience.
+              </p>
+
+              <div className="mt-6 text-orange-200/70 text-sm">
+                Fresh • Hygienic • Premium Quality • Chef Crafted
+              </div>
+            </div>
           </div>
         </div>
       </div>
