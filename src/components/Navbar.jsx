@@ -1,217 +1,158 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  // 🔥 AUTH DATA (backend NestJS JWT based)
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   const navLinks = [
     { path: "/", name: "Home" },
     { path: "/menu", name: "Menu" },
     { path: "/deals", name: "Deals" },
     { path: "/contact", name: "Contact" },
-    { path: "/login", name: "Admin" },
   ];
 
   const linkClass =
-    "relative text-sm uppercase tracking-[3px] text-white/75 hover:text-orange-300 transition duration-300";
+    "relative text-sm uppercase tracking-[3px] text-white/75 hover:text-orange-300 transition";
 
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7 }}
       className="
-        fixed
-        top-0
-        left-0
-        w-full
-        z-50
-        border-b
-        border-white/10
-        bg-black/35
-        backdrop-blur-2xl
+        fixed top-0 left-0 w-full z-50
+        border-b border-white/10
+        bg-black/35 backdrop-blur-2xl
       "
     >
-      {/* 🔥 TOP GLOW */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,140,0,0.15),transparent_60%)]" />
-
       <div className="relative max-w-7xl mx-auto flex items-center justify-between px-5 md:px-8 py-4">
         {/* 🍕 LOGO */}
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="flex items-center gap-3"
-        >
-          <div
-            className="
-              w-11
-              h-11
-              rounded-2xl
-              bg-linear-to-br
-              from-orange-400
-              to-yellow-300
-              flex
-              items-center
-              justify-center
-              shadow-[0_0_25px_rgba(255,140,0,0.45)]
-            "
-          >
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-orange-400 to-yellow-300 flex items-center justify-center">
             🍕
           </div>
 
-          <div>
-            <h1 className="text-lg md:text-2xl font-black text-orange-300 tracking-wide">
-              Hungry Oven
-            </h1>
+          <h1 className="text-orange-300 font-bold text-lg">Hungry Oven</h1>
+        </div>
 
-            <p className="text-[10px] md:text-xs text-white/40 uppercase tracking-[4px]">
-              Premium Taste
-            </p>
-          </div>
-        </motion.div>
-
-        {/* 🖥 DESKTOP LINKS */}
+        {/* DESKTOP MENU */}
         <div className="hidden md:flex items-center gap-8">
+          {/* NORMAL LINKS */}
           {navLinks.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={({ isActive }) =>
-                `${linkClass} ${isActive ? "text-orange-300" : ""}`
-              }
-            >
-              {({ isActive }) => (
-                <div className="relative">
-                  {item.name}
-
-                  {isActive && (
-                    <motion.div
-                      layoutId="navGlow"
-                      className="
-                        absolute
-                        -bottom-2
-                        left-0
-                        w-full
-                        h-0.5
-                        bg-orange-400
-                        rounded-full
-                        shadow-[0_0_15px_rgba(255,140,0,0.9)]
-                      "
-                    />
-                  )}
-                </div>
-              )}
+            <NavLink key={item.path} to={item.path} className={linkClass}>
+              {item.name}
             </NavLink>
           ))}
 
-          {/* 🔥 ORDER BUTTON */}
-          <motion.button
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0px 0px 25px rgba(255,140,0,0.5)",
-            }}
-            whileTap={{ scale: 0.96 }}
-            className="
-              px-6
-              py-3
-              rounded-full
-              bg-linear-to-r
-              from-orange-400
-              to-yellow-300
-              text-black
-              font-bold
-              text-sm
-              shadow-[0_0_25px_rgba(255,140,0,0.4)]
-            "
-          >
-            Order Now
-          </motion.button>
+          {/* 🔥 ADMIN LINKS ONLY */}
+          {token && role === "admin" && (
+            <>
+              <NavLink
+                to="/admin"
+                className="text-orange-300 uppercase text-sm"
+              >
+                Admin
+              </NavLink>
+
+              <NavLink
+                to="/create-bill"
+                className="text-orange-300 uppercase text-sm"
+              >
+                Create Bill
+              </NavLink>
+            </>
+          )}
+
+          {/* LOGIN / LOGOUT */}
+          {!token ? (
+            <NavLink to="/login" className={linkClass}>
+              Login
+            </NavLink>
+          ) : (
+            <button
+              onClick={logout}
+              className="
+                px-5 py-2 rounded-full
+                bg-red-500/80 text-white
+                text-sm font-bold
+              "
+            >
+              Logout
+            </button>
+          )}
         </div>
 
-        {/* 📱 MOBILE MENU BUTTON */}
-        <motion.button
-          whileTap={{ scale: 0.9 }}
+        {/* MOBILE BUTTON */}
+        <button
           onClick={() => setOpen(!open)}
-          className="
-            md:hidden
-            w-11
-            h-11
-            rounded-xl
-            bg-white/10
-            border
-            border-white/10
-            flex
-            items-center
-            justify-center
-            text-orange-300
-            text-2xl
-            backdrop-blur-xl
-          "
+          className="md:hidden text-orange-300 text-2xl"
         >
           {open ? "✕" : "☰"}
-        </motion.button>
+        </button>
       </div>
 
-      {/* 📱 MOBILE MENU */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.35 }}
-            className="
-              md:hidden
-              overflow-hidden
-              border-t
-              border-white/10
-              bg-black/70
-              backdrop-blur-2xl
-            "
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="md:hidden overflow-hidden bg-black/70"
           >
-            <div className="px-6 py-6 flex flex-col gap-5">
+            <div className="flex flex-col px-6 py-5 gap-4">
               {navLinks.map((item) => (
                 <NavLink
                   key={item.path}
                   to={item.path}
                   onClick={() => setOpen(false)}
-                  className={({ isActive }) =>
-                    `
-                    text-sm
-                    uppercase
-                    tracking-[3px]
-                    transition
-                    ${
-                      isActive
-                        ? "text-orange-300"
-                        : "text-white/75 hover:text-orange-300"
-                    }
-                  `
-                  }
+                  className="text-white/80 uppercase text-sm"
                 >
                   {item.name}
                 </NavLink>
               ))}
 
-              {/* MOBILE BUTTON */}
-              <motion.button
-                whileTap={{ scale: 0.96 }}
-                whileHover={{
-                  boxShadow: "0px 0px 20px rgba(255,140,0,0.5)",
-                }}
-                className="
-                  mt-3
-                  py-3
-                  rounded-2xl
-                  bg-linear-to-r
-                  from-orange-400
-                  to-yellow-300
-                  text-black
-                  font-bold
-                "
-              >
-                Order Now 🍕
-              </motion.button>
+              {/* ADMIN MOBILE */}
+              {token && role === "admin" && (
+                <>
+                  <NavLink
+                    to="/admin"
+                    onClick={() => setOpen(false)}
+                    className="text-orange-300 uppercase text-sm"
+                  >
+                    Admin
+                  </NavLink>
+
+                  <NavLink
+                    to="/create-bill"
+                    onClick={() => setOpen(false)}
+                    className="text-orange-300 uppercase text-sm"
+                  >
+                    Create Bill
+                  </NavLink>
+                </>
+              )}
+
+              {/* AUTH */}
+              {!token ? (
+                <NavLink to="/login" onClick={() => setOpen(false)}>
+                  Login
+                </NavLink>
+              ) : (
+                <button onClick={logout} className="text-red-400 text-left">
+                  Logout
+                </button>
+              )}
             </div>
           </motion.div>
         )}
