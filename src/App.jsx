@@ -1,11 +1,15 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable react-refresh/only-export-components */
-/* eslint-disable no-undef */
 import { Routes, Route, Navigate } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Menu from "./pages/Menu";
+import AdminDashboard from "./pages/AdminDashboard";
+import CreateBill from "./pages/CreateBill";
 
 function App() {
   const token = localStorage.getItem("token");
-
   const role = localStorage.getItem("role");
 
   return (
@@ -46,3 +50,5 @@ function App() {
     </>
   );
 }
+
+export default App;
