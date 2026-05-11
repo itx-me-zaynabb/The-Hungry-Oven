@@ -194,7 +194,7 @@ export default function Login() {
               mt-8
               w-full
               rounded-2xl
-              bg-gradient-to-r
+              bg-linear-to-r
               from-orange-400
               to-yellow-400
               py-4
@@ -206,13 +206,6 @@ export default function Login() {
           >
             Enter The Oven 🍕
           </motion.button>
-
-          {/* DEMO LOGIN */}
-          <div className="mt-6 text-center text-sm text-orange-100/60 leading-7">
-            <p>Admin Login:</p>
-
-            <p className="text-orange-300">admin@gmail.com / 123456</p>
-          </div>
         </div>
       </motion.div>
     </section>

@@ -231,7 +231,7 @@ export default function AdminDashboard() {
                     px-6
                     py-3
                     rounded-2xl
-                    bg-gradient-to-r
+                    bg-linear-to-r
                     from-orange-400
                     to-yellow-400
                     text-black
@@ -263,7 +263,7 @@ export default function AdminDashboard() {
               px-8
               py-4
               rounded-full
-              bg-gradient-to-r
+              bg-linear-to-r
               from-red-500
               to-orange-500
               text-white
