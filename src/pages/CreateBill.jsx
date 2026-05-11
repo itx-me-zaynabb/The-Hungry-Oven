@@ -222,9 +222,12 @@ export default function CreateBill() {
           </div>
 
           <div className="text-center mt-8 text-sm">
-            <p>✨ Thanks For Ordering</p>
+            <p>✨ Thank you for dining with Hungry Oven.</p>
 
-            <p className="mt-1">🍕 Thanks For Visiting Hungry Oven</p>
+            <p className="mt-1">
+              🍕 We truly appreciate your order and hope to serve you again soon
+              ❤️
+            </p>
           </div>
         </div>
       </div>
