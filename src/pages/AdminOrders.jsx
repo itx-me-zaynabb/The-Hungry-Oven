@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/immutability */
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API } from "../api";
+import { API } from "/src/config/api";
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState([]);

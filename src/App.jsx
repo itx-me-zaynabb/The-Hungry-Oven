@@ -10,6 +10,7 @@ import Contact from "./pages/Contact";
 import { Routes, Route } from "react-router-dom";
 import Cart from "./pages/Cart";
 import AdminDashboard from "./pages/AdminOrders";
+import CreateBill from "./pages/CreateBill";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -30,6 +31,7 @@ function App() {
           path="/cart"
           element={<Cart cartItems={cart} setCart={setCart} />}
         />
+        <Route path="/create-bill" element={<CreateBill />} />
       </Routes>
     </>
   );
