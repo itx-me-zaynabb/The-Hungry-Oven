@@ -47,7 +47,7 @@ export default function Navbar() {
               w-11
               h-11
               rounded-2xl
-              bg-gradient-to-br
+              bg-linear-to-br
               from-orange-400
               to-yellow-300
               flex
@@ -92,7 +92,7 @@ export default function Navbar() {
                         -bottom-2
                         left-0
                         w-full
-                        h-[2px]
+                        h-0.5
                         bg-orange-400
                         rounded-full
                         shadow-[0_0_15px_rgba(255,140,0,0.9)]
@@ -115,7 +115,7 @@ export default function Navbar() {
               px-6
               py-3
               rounded-full
-              bg-gradient-to-r
+              bg-linear-to-r
               from-orange-400
               to-yellow-300
               text-black
@@ -203,7 +203,7 @@ export default function Navbar() {
                   mt-3
                   py-3
                   rounded-2xl
-                  bg-gradient-to-r
+                  bg-linear-to-r
                   from-orange-400
                   to-yellow-300
                   text-black
