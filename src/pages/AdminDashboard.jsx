@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/purity */
+/* eslint-disable no-unused-vars */
 
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +16,7 @@ export default function AdminDashboard() {
       desc: "Generate premium customer bills instantly",
       icon: "🧾",
       path: "/create-bill",
+      glow: "from-orange-500/30 to-yellow-500/10",
     },
 
     {
@@ -22,6 +24,7 @@ export default function AdminDashboard() {
       desc: "Track and manage all restaurant orders",
       icon: "🍕",
       path: "/orders",
+      glow: "from-red-500/30 to-orange-500/10",
     },
 
     {
@@ -29,63 +32,114 @@ export default function AdminDashboard() {
       desc: "View sales and restaurant performance",
       icon: "📊",
       path: "/analytics",
+      glow: "from-yellow-500/30 to-orange-500/10",
+    },
+  ];
+
+  const stats = [
+    {
+      title: "Total Orders",
+      value: "1,248",
+      icon: "🍕",
+    },
+
+    {
+      title: "Revenue",
+      value: "Rs 248K",
+      icon: "💰",
+    },
+
+    {
+      title: "Customers",
+      value: "892",
+      icon: "👨‍🍳",
     },
   ];
 
   return (
-    <section className="relative min-h-screen overflow-hidden text-white">
-      {/* 🔥 BACKGROUND */}
+    <section
+      className="
+        relative
+        min-h-screen
+        overflow-hidden
+        bg-black
+        text-white
+      "
+    >
+      {/* 🍕 BACKGROUND */}
       <div className="absolute inset-0">
         <img
           src="/images/pizza-bg.jpg"
           alt=""
-          className="w-full h-full object-cover scale-110"
+          className="
+            w-full
+            h-full
+            object-cover
+            scale-110
+            opacity-40
+            animate-pulse
+          "
         />
       </div>
 
-      {/* 🌑 DARK OVERLAY */}
-      <div className="absolute inset-0 bg-black/70" />
+      {/* 🌑 OVERLAY */}
+      <div className="absolute inset-0 bg-black/75" />
 
-      {/* 🔥 GLOW */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,140,0,0.30),transparent_60%)]" />
+      {/* 🔥 RADIAL GLOW */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,140,0,0.35),transparent_60%)]" />
 
       {/* 🍕 FLOATING PIZZAS */}
-      {[...Array(10)].map((_, i) => (
+      {[...Array(14)].map((_, i) => (
         <motion.img
           key={i}
           src="/images/pizza.webp"
-          className="absolute w-14 md:w-20 opacity-10 hidden sm:block"
+          className="
+            absolute
+            w-10
+            sm:w-14
+            md:w-20
+            opacity-10
+            pointer-events-none
+          "
           style={{
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
           }}
           animate={{
-            y: [0, -20, 0],
-            rotate: [0, 10, -10, 0],
+            y: [0, -25, 0],
+            rotate: [0, 20, -20, 0],
+            scale: [1, 1.08, 1],
           }}
           transition={{
-            duration: 7 + i,
+            duration: 5 + i,
             repeat: Infinity,
           }}
         />
       ))}
 
       {/* ✨ PARTICLES */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(18)].map((_, i) => (
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(25)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1.5 h-1.5 bg-orange-400 rounded-full opacity-40"
+            className="
+              absolute
+              rounded-full
+              bg-orange-400
+              opacity-30
+            "
             style={{
+              width: `${Math.random() * 6 + 2}px`,
+              height: `${Math.random() * 6 + 2}px`,
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
             }}
             animate={{
-              y: [0, -15, 0],
+              y: [0, -20, 0],
               opacity: [0.2, 0.7, 0.2],
             }}
             transition={{
-              duration: 4 + Math.random() * 4,
+              duration: 3 + Math.random() * 5,
               repeat: Infinity,
             }}
           />
@@ -93,62 +147,130 @@ export default function AdminDashboard() {
       </div>
 
       {/* 🔥 CONTENT */}
-      <div className="relative z-10 px-4 sm:px-6 lg:px-10 py-16">
-        {/* HEADER */}
+      <div
+        className="
+          relative
+          z-10
+          px-4
+          sm:px-6
+          lg:px-10
+          py-10
+          sm:py-14
+        "
+      >
+        {/* 🔥 TOP BAR */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center"
+          initial={{
+            opacity: 0,
+            y: -30,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          className="
+            flex
+            flex-col
+            lg:flex-row
+            items-center
+            justify-between
+            gap-5
+          "
         >
-          <h1
+          {/* LEFT */}
+          <div className="text-center lg:text-left">
+            <motion.h1
+              animate={{
+                textShadow: [
+                  "0px 0px 15px rgba(255,140,0,0.3)",
+                  "0px 0px 35px rgba(255,140,0,0.8)",
+                  "0px 0px 15px rgba(255,140,0,0.3)",
+                ],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+              }}
+              className="
+                text-4xl
+                sm:text-5xl
+                md:text-6xl
+                lg:text-7xl
+                font-black
+                text-orange-400
+              "
+            >
+              Hungry Oven 🔥
+            </motion.h1>
+
+            <p
+              className="
+                mt-3
+                text-sm
+                sm:text-base
+                text-orange-100/70
+              "
+            >
+              Premium Restaurant Admin Experience
+            </p>
+          </div>
+
+          {/* RIGHT */}
+          <motion.div
+            whileHover={{
+              scale: 1.03,
+            }}
             className="
-              text-4xl
-              sm:text-5xl
-              md:text-7xl
-              font-black
-              text-orange-400
-              drop-shadow-[0_0_30px_rgba(255,140,0,0.7)]
+              rounded-3xl
+              border
+              border-white/10
+              bg-white/5
+              backdrop-blur-2xl
+              px-6
+              py-4
+              text-center
+              shadow-[0_0_30px_rgba(255,140,0,0.15)]
             "
           >
-            Admin Dashboard 🔥
-          </h1>
+            <p className="text-sm text-orange-200/70">Welcome Back 👑</p>
 
-          <p className="mt-4 text-orange-100/70 text-sm sm:text-base md:text-lg">
-            Control your premium restaurant experience
-          </p>
+            <h2 className="mt-1 text-xl font-bold">Admin Panel</h2>
+          </motion.div>
         </motion.div>
 
-        {/* 🔥 STATS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14 max-w-6xl mx-auto">
-          {[
-            {
-              title: "Total Orders",
-              value: "1,248",
-              icon: "🍕",
-            },
-
-            {
-              title: "Revenue",
-              value: "Rs 248K",
-              icon: "💰",
-            },
-
-            {
-              title: "Customers",
-              value: "892",
-              icon: "👨‍🍳",
-            },
-          ].map((item, i) => (
+        {/* 📊 STATS */}
+        <div
+          className="
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            xl:grid-cols-3
+            gap-6
+            mt-14
+            max-w-7xl
+            mx-auto
+          "
+        >
+          {stats.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
+              initial={{
+                opacity: 0,
+                y: 40,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                delay: i * 0.15,
+              }}
               whileHover={{
-                y: -8,
+                y: -10,
                 scale: 1.02,
               }}
               className="
+                group
                 relative
                 overflow-hidden
                 rounded-[35px]
@@ -156,18 +278,77 @@ export default function AdminDashboard() {
                 border-white/10
                 bg-white/5
                 backdrop-blur-2xl
-                p-8
+                p-7
+                shadow-[0_0_40px_rgba(255,140,0,0.12)]
               "
             >
               {/* glow */}
-              <div className="absolute inset-0 bg-orange-500/10 blur-3xl" />
+              <div
+                className="
+                  absolute
+                  inset-0
+                  bg-orange-500/10
+                  blur-3xl
+                  opacity-0
+                  group-hover:opacity-100
+                  transition
+                  duration-500
+                "
+              />
+
+              {/* shine */}
+              <motion.div
+                animate={{
+                  x: ["-100%", "200%"],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                className="
+                  absolute
+                  top-0
+                  left-0
+                  w-1/2
+                  h-full
+                  bg-white/10
+                  skew-x-12
+                "
+              />
 
               <div className="relative z-10">
-                <div className="text-5xl">{item.icon}</div>
+                <motion.div
+                  animate={{
+                    rotate: [0, 8, -8, 0],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                  }}
+                  className="text-5xl"
+                >
+                  {item.icon}
+                </motion.div>
 
-                <h2 className="mt-5 text-lg text-orange-200">{item.title}</h2>
+                <h2
+                  className="
+                    mt-5
+                    text-lg
+                    text-orange-200
+                  "
+                >
+                  {item.title}
+                </h2>
 
-                <p className="mt-2 text-4xl font-black text-white">
+                <p
+                  className="
+                    mt-2
+                    text-4xl
+                    sm:text-5xl
+                    font-black
+                  "
+                >
                   {item.value}
                 </p>
               </div>
@@ -175,16 +356,35 @@ export default function AdminDashboard() {
           ))}
         </div>
 
-        {/* 🔥 ACTION CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-16 max-w-7xl mx-auto">
+        {/* 🚀 ACTION CARDS */}
+        <div
+          className="
+            grid
+            grid-cols-1
+            md:grid-cols-2
+            xl:grid-cols-3
+            gap-8
+            mt-16
+            max-w-7xl
+            mx-auto
+          "
+        >
           {cards.map((card, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
+              initial={{
+                opacity: 0,
+                y: 60,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                delay: i * 0.2,
+              }}
               whileHover={{
-                y: -10,
+                y: -12,
                 scale: 1.02,
               }}
               onClick={() => navigate(card.path)}
@@ -194,10 +394,23 @@ export default function AdminDashboard() {
                 cursor-pointer
               "
             >
-              {/* GLOW */}
-              <div className="absolute inset-0 bg-orange-400/20 blur-3xl opacity-0 group-hover:opacity-100 transition duration-500 rounded-[35px]" />
+              {/* animated glow */}
+              <div
+                className={`
+                  absolute
+                  inset-0
+                  rounded-[40px]
+                  blur-3xl
+                  opacity-0
+                  group-hover:opacity-100
+                  transition
+                  duration-500
+                  bg-gradient-to-r
+                  ${card.glow}
+                `}
+              />
 
-              {/* CARD */}
+              {/* card */}
               <div
                 className="
                   relative
@@ -209,69 +422,204 @@ export default function AdminDashboard() {
                   backdrop-blur-2xl
                   p-8
                   h-full
+                  shadow-[0_0_45px_rgba(255,140,0,0.12)]
                 "
               >
-                <div className="text-6xl">{card.icon}</div>
+                {/* animated border */}
+                <motion.div
+                  animate={{
+                    rotate: 360,
+                  }}
+                  transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  className="
+                    absolute
+                    -top-32
+                    -right-32
+                    w-64
+                    h-64
+                    rounded-full
+                    border
+                    border-orange-400/10
+                  "
+                />
 
-                <h2 className="mt-6 text-3xl font-bold text-orange-300">
+                <motion.div
+                  animate={{
+                    y: [0, -6, 0],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                  }}
+                  className="text-6xl"
+                >
+                  {card.icon}
+                </motion.div>
+
+                <h2
+                  className="
+                    mt-6
+                    text-2xl
+                    sm:text-3xl
+                    font-black
+                    text-orange-300
+                  "
+                >
                   {card.title}
                 </h2>
 
-                <p className="mt-4 text-white/70 leading-7">{card.desc}</p>
+                <p
+                  className="
+                    mt-4
+                    text-sm
+                    sm:text-base
+                    leading-7
+                    text-white/70
+                  "
+                >
+                  {card.desc}
+                </p>
 
                 <motion.button
                   whileHover={{
-                    scale: 1.03,
+                    scale: 1.05,
                   }}
                   whileTap={{
                     scale: 0.95,
                   }}
                   className="
                     mt-8
+                    rounded-2xl
+                    bg-gradient-to-r
+                    from-orange-400
+                    to-yellow-300
                     px-6
                     py-3
-                    rounded-2xl
-                    bg-linear-to-r
-                    from-orange-400
-                    to-yellow-400
+                    text-sm
+                    sm:text-base
+                    font-black
                     text-black
-                    font-bold
+                    shadow-[0_0_25px_rgba(255,140,0,0.35)]
                   "
                 >
-                  Open
+                  Open Dashboard →
                 </motion.button>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* 🔥 LOGOUT */}
+        {/* 🔥 QUICK ACTIONS */}
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 40,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            delay: 0.5,
+          }}
+          className="
+            mt-16
+            max-w-7xl
+            mx-auto
+            rounded-[35px]
+            border
+            border-white/10
+            bg-white/5
+            backdrop-blur-2xl
+            p-6
+            sm:p-8
+          "
+        >
+          <div
+            className="
+              flex
+              flex-col
+              lg:flex-row
+              items-center
+              justify-between
+              gap-6
+            "
+          >
+            <div className="text-center lg:text-left">
+              <h2
+                className="
+                  text-2xl
+                  sm:text-3xl
+                  font-black
+                  text-orange-300
+                "
+              >
+                Restaurant Control Center 🍕
+              </h2>
+
+              <p className="mt-3 text-white/70">
+                Manage orders, customers, analytics & restaurant operations.
+              </p>
+            </div>
+
+            <motion.button
+              whileHover={{
+                scale: 1.05,
+              }}
+              whileTap={{
+                scale: 0.95,
+              }}
+              className="
+                rounded-full
+                bg-gradient-to-r
+                from-orange-400
+                to-yellow-300
+                px-8
+                py-4
+                text-black
+                font-black
+                shadow-[0_0_30px_rgba(255,140,0,0.35)]
+              "
+            >
+              Explore Features 🚀
+            </motion.button>
+          </div>
+        </motion.div>
+
+        {/* 🚪 LOGOUT */}
         <div className="flex justify-center mt-16">
           <motion.button
             whileHover={{
-              scale: 1.05,
-              boxShadow: "0px 0px 25px rgba(255,140,0,0.5)",
+              scale: 1.06,
+              boxShadow: "0px 0px 30px rgba(255,100,0,0.5)",
             }}
             whileTap={{
-              scale: 0.95,
+              scale: 0.94,
             }}
             onClick={() => {
               logout();
               navigate("/login");
             }}
             className="
-              px-8
-              py-4
               rounded-full
-              bg-linear-to-r
+              bg-gradient-to-r
               from-red-500
-              to-orange-500
+              via-orange-500
+              to-yellow-400
+              px-10
+              py-4
+              text-base
+              sm:text-lg
+              font-black
               text-white
-              font-bold
-              text-lg
+              shadow-[0_0_35px_rgba(255,100,0,0.35)]
             "
           >
-            Logout
+            Logout 🔥
           </motion.button>
         </div>
       </div>
