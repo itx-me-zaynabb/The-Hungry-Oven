@@ -29,7 +29,7 @@ export default function Login() {
       setLoading(true);
 
       setError("");
-
+      console.log("LOGIN RESPONSE:", res.data);
       // ✅ FAKE USER LOGIN
       // USER KE LIYE PASSWORD CHECK NAHI HOGA
 
