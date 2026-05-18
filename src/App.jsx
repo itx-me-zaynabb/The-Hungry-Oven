@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { Routes, Route, Navigate } from "react-router-dom";
-
+import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
+import Deals from "./pages/Deals";
+import Contact from "./pages/Contact";
 import AdminDashboard from "./pages/AdminDashboard";
 import CreateBill from "./pages/CreateBill";
 
@@ -16,7 +18,7 @@ function App() {
     <>
       {/* NAVBAR ONLY AFTER LOGIN */}
       {token && <Navbar />}
-
+      <CustomCursor />
       <Routes>
         {/* LOGIN */}
         <Route path="/" element={token ? <Navigate to="/home" /> : <Login />} />
@@ -26,6 +28,14 @@ function App() {
 
         {/* MENU */}
         <Route path="/menu" element={token ? <Menu /> : <Navigate to="/" />} />
+        <Route
+          path="/deals"
+          element={token ? <Deals /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/contact"
+          element={token ? <Contact /> : <Navigate to="/" />}
+        />
 
         {/* ADMIN */}
         <Route

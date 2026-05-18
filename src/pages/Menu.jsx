@@ -169,24 +169,6 @@ export default function Menu() {
 
   return (
     <section className="relative min-h-screen overflow-hidden text-white">
-      {/* 🌄 BACKGROUND */}
-      <div className="absolute inset-0 overflow-hidden">
-        <img
-          src="/images/pizza-bg.jpg"
-          alt="background"
-          className="
-            w-full
-            h-full
-            object-cover
-            scale-105
-            md:scale-110
-            brightness-125
-            contrast-125
-            saturate-150
-          "
-        />
-      </div>
-
       {/* 🔥 OVERLAYS */}
       <div className="absolute inset-0 bg-black/45 md:bg-black/50" />
 

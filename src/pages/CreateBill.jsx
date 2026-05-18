@@ -234,15 +234,6 @@ export default function CreateBill() {
 
       {/* 🔥 MAIN UI */}
       <section className="relative min-h-screen overflow-hidden text-white no-print">
-        {/* 🔥 BACKGROUND */}
-        <div className="absolute inset-0">
-          <img
-            src="/images/pizza-bg.jpg"
-            alt=""
-            className="w-full h-full object-cover scale-110"
-          />
-        </div>
-
         {/* 🌑 OVERLAY */}
         <div className="absolute inset-0 bg-black/70" />
 
