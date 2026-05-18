@@ -25,41 +25,51 @@ export default function Login() {
   const [error, setError] = useState("");
 
   const handleLogin = async () => {
+    // ✅ VALIDATION
+    if (!email || !password) {
+      setError("Please fill all fields");
+      return;
+    }
+
     try {
       setLoading(true);
 
       setError("");
-      console.log("LOGIN RESPONSE:", res.data);
-      // ✅ FAKE USER LOGIN
-      // USER KE LIYE PASSWORD CHECK NAHI HOGA
 
+      // ✅ LOGIN API
       const res = await axios.post(`${API}/auth/login`, {
         email,
         password,
       });
 
-      console.log("res", res);
+      // ✅ RESPONSE
+      console.log("LOGIN RESPONSE:", res.data);
 
-      // ✅ SAVE
+      // ✅ SAVE DATA
       localStorage.setItem("token", res.data.token);
 
       localStorage.setItem("role", res.data.role);
 
       localStorage.setItem("email", res.data.email);
 
-      // 👑 ADMIN
+      // ✅ ADMIN
       if (res.data.role === "admin") {
         navigate("/admin");
       }
 
-      // 👤 USER
+      // ✅ USER
       else {
         navigate("/home");
       }
     } catch (err) {
       console.log(err);
 
-      setError("Server not running or login failed");
+      // ✅ BACKEND ERROR MESSAGE
+      if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("Server not running or login failed");
+      }
     } finally {
       setLoading(false);
     }
@@ -75,6 +85,7 @@ export default function Login() {
       items-center
       justify-center
       px-4
+      py-10
       text-white
     "
     >
@@ -83,7 +94,12 @@ export default function Login() {
         <img
           src="/images/pizza-bg.webp"
           alt=""
-          className="w-full h-full object-cover"
+          className="
+            w-full
+            h-full
+            object-cover
+            scale-110
+          "
         />
       </div>
 
@@ -94,11 +110,18 @@ export default function Login() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,140,0,0.3),transparent_60%)]" />
 
       {/* 🍕 FLOATING PIZZAS */}
-      {[...Array(14)].map((_, i) => (
+      {[...Array(10)].map((_, i) => (
         <motion.img
           key={i}
           src="/images/pizza.webp"
-          className="absolute w-16 opacity-10 hidden md:block"
+          className="
+            absolute
+            w-10
+            sm:w-14
+            md:w-16
+            opacity-10
+            pointer-events-none
+          "
           style={{
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
@@ -106,6 +129,7 @@ export default function Login() {
           animate={{
             y: [0, -25, 0],
             rotate: [0, 15, -15, 0],
+            scale: [1, 1.08, 1],
           }}
           transition={{
             duration: 5 + i,
@@ -114,15 +138,49 @@ export default function Login() {
         />
       ))}
 
-      {/* 🔐 CARD */}
+      {/* ✨ PARTICLES */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="
+              absolute
+              w-1
+              h-1
+              bg-orange-400
+              rounded-full
+              opacity-40
+            "
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.2, 1, 0.2],
+            }}
+            transition={{
+              duration: 3 + i,
+              repeat: Infinity,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* 🔐 LOGIN CARD */}
       <motion.div
         initial={{
           opacity: 0,
-          y: 60,
+          y: 70,
+          scale: 0.9,
         }}
         animate={{
           opacity: 1,
           y: 0,
+          scale: 1,
+        }}
+        transition={{
+          duration: 0.7,
         }}
         className="
           relative
@@ -134,46 +192,81 @@ export default function Login() {
           border-white/10
           bg-white/5
           backdrop-blur-2xl
-          p-8
-          shadow-[0_0_50px_rgba(255,140,0,0.25)]
+          p-6
+          sm:p-8
+          shadow-[0_0_60px_rgba(255,140,0,0.25)]
         "
       >
-        {/* TITLE */}
-        <div className="text-center">
+        {/* 🍕 LOGO */}
+        <motion.div
+          animate={{
+            y: [0, -8, 0],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+          }}
+          className="flex justify-center"
+        >
+          <img
+            src="/images/pizza.webp"
+            alt=""
+            className="
+              w-20
+              sm:w-24
+              drop-shadow-[0_0_20px_rgba(255,140,0,0.7)]
+            "
+          />
+        </motion.div>
+
+        {/* 🔥 TITLE */}
+        <div className="text-center mt-4">
           <h1
             className="
-            text-4xl
-            font-black
-            text-orange-400
-          "
+              text-3xl
+              sm:text-4xl
+              font-black
+              text-orange-400
+              tracking-wide
+            "
           >
             Hungry Oven 🍕
           </h1>
 
-          <p className="mt-2 text-sm text-orange-100/70">Login To Continue</p>
+          <p className="mt-2 text-sm text-orange-100/70">
+            Premium Restaurant Experience
+          </p>
         </div>
 
-        {/* ERROR */}
+        {/* ❌ ERROR */}
         {error && (
-          <div
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: -10,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
             className="
-            mt-5
-            rounded-xl
-            border
-            border-red-500/20
-            bg-red-500/10
-            p-3
-            text-sm
-            text-red-300
-          "
+              mt-5
+              rounded-xl
+              border
+              border-red-500/20
+              bg-red-500/10
+              p-3
+              text-sm
+              text-red-300
+            "
           >
             {error}
-          </div>
+          </motion.div>
         )}
 
-        {/* EMAIL */}
+        {/* 📧 EMAIL */}
         <div className="mt-7">
-          <label className="text-sm text-orange-200/80">Email</label>
+          <label className="text-sm text-orange-200/80">Email Address</label>
 
           <input
             type="email"
@@ -189,13 +282,18 @@ export default function Login() {
               bg-black/40
               px-4
               py-3
+              text-sm
+              sm:text-base
               outline-none
+              transition-all
+              duration-300
               focus:border-orange-400
+              focus:shadow-[0_0_20px_rgba(255,140,0,0.35)]
             "
           />
         </div>
 
-        {/* PASSWORD */}
+        {/* 🔒 PASSWORD */}
         <div className="mt-5 relative">
           <label className="text-sm text-orange-200/80">Password</label>
 
@@ -213,11 +311,18 @@ export default function Login() {
               bg-black/40
               px-4
               py-3
+              pr-20
+              text-sm
+              sm:text-base
               outline-none
+              transition-all
+              duration-300
               focus:border-orange-400
+              focus:shadow-[0_0_20px_rgba(255,140,0,0.35)]
             "
           />
 
+          {/* 👁 SHOW/HIDE */}
           <button
             type="button"
             onClick={() => setShowPass(!showPass)}
@@ -227,13 +332,15 @@ export default function Login() {
               top-11
               text-sm
               text-orange-300
+              hover:text-orange-400
+              transition-all
             "
           >
             {showPass ? "Hide" : "Show"}
           </button>
         </div>
 
-        {/* BUTTON */}
+        {/* 🚀 LOGIN BUTTON */}
         <motion.button
           whileHover={{
             scale: 1.03,
@@ -249,20 +356,34 @@ export default function Login() {
             rounded-2xl
             bg-gradient-to-r
             from-orange-400
-            to-yellow-300
+            via-yellow-300
+            to-orange-500
             py-3
-            text-lg
-            font-bold
+            sm:py-4
+            text-base
+            sm:text-lg
+            font-black
             text-black
+            shadow-[0_0_25px_rgba(255,140,0,0.45)]
+            transition-all
+            duration-300
           "
         >
           {loading ? "Logging in..." : "Enter The Oven 🍕"}
         </motion.button>
 
-        {/* FOOTER */}
-        <p className="mt-6 text-center text-xs text-white/40">
-          Crafted with ❤️ by Hungry Oven
-        </p>
+        {/* 🔥 FOOTER */}
+        <div className="mt-6 text-center">
+          <p className="text-xs text-white/40">
+            Crafted with ❤️ by Hungry Oven
+          </p>
+
+          <div className="flex justify-center gap-2 mt-4">
+            <span className="w-2 h-2 rounded-full bg-orange-400" />
+            <span className="w-2 h-2 rounded-full bg-yellow-300" />
+            <span className="w-2 h-2 rounded-full bg-orange-500" />
+          </div>
+        </div>
       </motion.div>
     </section>
   );
