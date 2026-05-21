@@ -159,54 +159,25 @@ export default function CreateBill() {
       {/* 🖨️ PRINT CSS */}
       <style>
         {`
-    @page {
-      size: auto;
-      margin: 12mm;
-    }
+          @media print {
 
-    @media print {
+            body {
+              background: white !important;
+            }
 
-      html,
-      body {
-        margin: 0 !important;
-        padding: 0 !important;
-        background: white !important;
-        overflow: visible !important;
-      }
+            .no-print {
+              display: none !important;
+            }
 
-      body {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
+            .print-bill {
+              display: block !important;
+            }
+          }
 
-      .no-print {
-        display: none !important;
-      }
-
-      .print-bill {
-        display: block !important;
-        margin-top: 20px !important;
-        padding-top: 20px !important;
-        overflow: visible !important;
-      }
-
-      * {
-        overflow: visible !important;
-        box-shadow: none !important;
-      }
-
-      h1,
-      h2,
-      h3,
-      p,
-      table,
-      tr,
-      td,
-      th {
-        page-break-inside: avoid !important;
-      }
-    }
-  `}
+          .print-bill {
+            display: none;
+          }
+        `}
       </style>
 
       {/* 🖨️ REAL RECEIPT BILL */}
