@@ -179,32 +179,6 @@ export default function CreateBill() {
           }
         `}
       </style>
-      {/* 🧾 PRINT RECEIPT ONLY */}
-      <div className="print-bill hidden">
-        <div className="receipt">
-          <h1>Hungry Oven</h1>
-          <p>{date}</p>
-          <hr />
-
-          {billItems.map((item) => (
-            <div key={item.id} className="receipt-item">
-              <p>
-                {item.name} ({item.size})
-              </p>
-              <p>
-                {item.quantity} x Rs {item.price}
-              </p>
-              <p>Rs {item.price * item.quantity}</p>
-            </div>
-          ))}
-
-          <hr />
-
-          <h2>Total: Rs {total}</h2>
-
-          <p className="thanks">Thanks for your order ❤️</p>
-        </div>
-      </div>
 
       {/* 🖨️ REAL RECEIPT BILL */}
       <div className="print-bill p-6 text-black">
