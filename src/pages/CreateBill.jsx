@@ -26,52 +26,11 @@ const menuData = [
       { label: "Large", price: 2199 },
     ],
   },
-  {
-    id: 3,
-    name: "Alfredo Pasta",
-    category: "Pasta",
-    image: "/images/4.webp",
-    sizes: [
-      { label: "Half", price: 499 },
-      { label: "Full", price: 899 },
-    ],
-  },
-  {
-    id: 4,
-    name: "Arrabiata Pasta",
-    category: "Pasta",
-    image: "/images/5.webp",
-    sizes: [
-      { label: "Half", price: 549 },
-      { label: "Full", price: 999 },
-    ],
-  },
-  {
-    id: 5,
-    name: "Loaded Fries",
-    category: "Fries",
-    image: "/images/6.webp",
-    sizes: [
-      { label: "Regular", price: 499 },
-      { label: "Large", price: 799 },
-    ],
-  },
-  {
-    id: 6,
-    name: "Hot Wings",
-    category: "Wings",
-    image: "/images/10.webp",
-    sizes: [
-      { label: "6 pcs", price: 699 },
-      { label: "12 pcs", price: 1299 },
-    ],
-  },
 ];
 
 export default function CreateBill() {
   const [billItems, setBillItems] = useState([]);
 
-  // ✅ FIXED: date added safely
   const date = new Date().toLocaleString();
 
   const addItem = (food, size) => {
@@ -93,31 +52,12 @@ export default function CreateBill() {
         {
           id: Date.now(),
           name: food.name,
-          category: food.category,
           size: size.label,
           price: size.price,
           quantity: 1,
         },
       ]);
     }
-  };
-
-  const increaseQty = (id) => {
-    setBillItems(
-      billItems.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
-      ),
-    );
-  };
-
-  const decreaseQty = (id) => {
-    setBillItems(
-      billItems
-        .map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
-        )
-        .filter((item) => item.quantity > 0),
-    );
   };
 
   const total = billItems.reduce(
@@ -127,58 +67,70 @@ export default function CreateBill() {
 
   return (
     <>
-      {/* 🖨️ PRINT CSS */}
+      {/* ✅ PRINT ONLY STYLES */}
       <style>{`
-        .print-bill { display: none; }
+        .screen { display: block; }
+
+        .print-receipt { display: none; }
 
         @media print {
-          body * { visibility: hidden; }
+          body * {
+            visibility: hidden;
+          }
 
-          .print-bill,
-          .print-bill * { visibility: visible; }
+          .print-receipt,
+          .print-receipt * {
+            visibility: visible;
+          }
 
-          .print-bill {
-            display: block !important;
+          .print-receipt {
             position: absolute;
-            top: 0;
             left: 0;
-            width: 100%;
-            background: white;
+            top: 0;
+            width: 80mm;
+            padding: 10px;
+            font-family: monospace;
+            color: black;
           }
 
           .receipt {
-            width: 280px;
-            margin: auto;
-            font-family: monospace;
-            color: black;
+            width: 100%;
             text-align: center;
           }
 
           .item {
             display: flex;
             justify-content: space-between;
-            font-size: 14px;
-            margin: 6px 0;
+            font-size: 12px;
+            margin: 4px 0;
           }
 
           hr {
             border: none;
             border-top: 1px dashed black;
-            margin: 10px 0;
+            margin: 8px 0;
           }
 
           @page {
             size: 80mm auto;
             margin: 0;
           }
+
+          /* hide screen UI */
+          .screen {
+            display: none !important;
+          }
         }
       `}</style>
 
-      {/* 🧾 PRINT RECEIPT */}
-      <div className="print-bill">
+      {/* ===================== */}
+      {/* 🧾 PRINT RECEIPT ONLY */}
+      {/* ===================== */}
+      <div className="print-receipt">
         <div className="receipt">
-          <h1>🍕 Hungry Oven</h1>
+          <h2>🍕 Hungry Oven</h2>
           <p>{date}</p>
+
           <hr />
 
           {billItems.map((item) => (
@@ -187,38 +139,42 @@ export default function CreateBill() {
                 {item.name} ({item.size})
               </span>
               <span>
-                {item.quantity} x Rs {item.price}
+                {item.quantity} x {item.price}
               </span>
             </div>
           ))}
 
           <hr />
-          <h2>Total: Rs {total}</h2>
-          <p>✨ Thank you for your order ❤️</p>
+
+          <h3>Total: Rs {total}</h3>
+
+          <hr />
+
+          <p>Thanks for your order ❤️</p>
         </div>
       </div>
 
-      {/* 🔥 MAIN UI */}
-      <section className="relative min-h-screen text-white no-print">
-        <div className="absolute inset-0 bg-black/70" />
-
-        <div className="relative z-10 p-10">
-          <h1 className="text-4xl font-bold text-center text-orange-400">
-            Create Premium Bill 🧾
+      {/* ===================== */}
+      {/* 🔥 SCREEN UI (NO PRINT) */}
+      {/* ===================== */}
+      <div className="screen">
+        <section className="min-h-screen bg-black text-white p-10">
+          <h1 className="text-3xl font-bold text-orange-400 text-center">
+            Create Bill 🧾
           </h1>
 
-          <div className="grid lg:grid-cols-[1fr_400px] gap-10 mt-10">
+          <div className="grid md:grid-cols-2 gap-10 mt-10">
             {/* MENU */}
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div>
               {menuData.map((food) => (
-                <div key={food.id} className="bg-white/10 p-4 rounded-xl">
-                  <h2 className="text-xl font-bold">{food.name}</h2>
+                <div key={food.id} className="mb-5 bg-white/10 p-4 rounded">
+                  <h2 className="font-bold">{food.name}</h2>
 
                   {food.sizes.map((size) => (
                     <button
                       key={size.label}
                       onClick={() => addItem(food, size)}
-                      className="block w-full mt-2 bg-orange-500/20 p-2 rounded"
+                      className="block w-full mt-2 bg-orange-500/30 p-2 rounded"
                     >
                       {size.label} - Rs {size.price}
                     </button>
@@ -228,37 +184,31 @@ export default function CreateBill() {
             </div>
 
             {/* BILL */}
-            <div className="bg-white/10 p-5 rounded-xl">
-              <h2 className="text-2xl font-bold">Live Bill</h2>
+            <div className="bg-white/10 p-5 rounded">
+              <h2 className="text-xl font-bold">Live Bill</h2>
 
               {billItems.map((item) => (
-                <div key={item.id} className="flex justify-between mt-3">
-                  <div>
+                <div key={item.id} className="flex justify-between mt-2">
+                  <span>
                     {item.name} ({item.size})
-                  </div>
-
-                  <div>
-                    <button onClick={() => decreaseQty(item.id)}>-</button>
-                    <span className="mx-2">{item.quantity}</span>
-                    <button onClick={() => increaseQty(item.id)}>+</button>
-                  </div>
-
-                  <div>Rs {item.price * item.quantity}</div>
+                  </span>
+                  <span>{item.quantity}</span>
+                  <span>Rs {item.price * item.quantity}</span>
                 </div>
               ))}
 
-              <h3 className="mt-5 text-xl font-bold">Total: Rs {total}</h3>
+              <h3 className="mt-5 font-bold">Total: Rs {total}</h3>
 
               <button
                 onClick={() => window.print()}
-                className="mt-5 w-full bg-orange-500 py-3 rounded"
+                className="mt-5 w-full bg-orange-500 py-2 rounded"
               >
                 Print Bill 🖨️
               </button>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   );
 }
