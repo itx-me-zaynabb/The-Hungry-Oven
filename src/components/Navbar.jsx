@@ -6,13 +6,14 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  // 🔥 AUTH DATA (backend NestJS JWT based)
+  // AUTH DATA
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
 
   const logout = () => {
     localStorage.clear();
     navigate("/");
+    window.location.reload();
   };
 
   const navLinks = [
@@ -36,7 +37,7 @@ export default function Navbar() {
       "
     >
       <div className="relative max-w-7xl mx-auto flex items-center justify-between px-5 md:px-8 py-4">
-        {/* 🍕 LOGO */}
+        {/* LOGO */}
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-linear-to-br from-orange-400 to-yellow-300 flex items-center justify-center">
             🍕
@@ -49,19 +50,34 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-8">
           {/* NORMAL LINKS */}
           {navLinks.map((item) => (
-            <NavLink key={item.path} to={item.path} className={linkClass}>
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) =>
+                `${linkClass} ${
+                  isActive ? "text-orange-300 font-semibold" : ""
+                }`
+              }
+            >
               {item.name}
             </NavLink>
           ))}
 
-          {/* 🔥 ADMIN LINKS ONLY */}
+          {/* GUEST */}
+          {!token && (
+            <NavLink to="/login" className="text-orange-300 uppercase text-sm">
+              Login
+            </NavLink>
+          )}
+
+          {/* ADMIN */}
           {token && role === "admin" && (
             <>
               <NavLink
                 to="/admin"
                 className="text-orange-300 uppercase text-sm"
               >
-                Admin
+                Admin Panel
               </NavLink>
 
               <NavLink
@@ -73,31 +89,23 @@ export default function Navbar() {
             </>
           )}
 
-          {/* LOGIN / LOGOUT */}
-          {!token ? (
-            <NavLink to="/login" className={linkClass}>
-              Login
-            </NavLink>
-          ) : (
+          {/* LOGOUT */}
+          {token && (
             <button
               onClick={logout}
-              className="
-                px-5 py-2 rounded-full
-                bg-red-500/80 text-white
-                text-sm font-bold
-              "
+              className="text-red-400 uppercase text-sm hover:text-red-300 transition"
             >
               Logout
             </button>
           )}
         </div>
 
-        {/* MOBILE BUTTON */}
+        {/* MOBILE MENU BUTTON */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-orange-300 text-2xl"
+          className="md:hidden text-white text-2xl"
         >
-          {open ? "✕" : "☰"}
+          ☰
         </button>
       </div>
 
@@ -105,55 +113,73 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="md:hidden overflow-hidden bg-black/70"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            className="
+              md:hidden
+              bg-black/95
+              border-t border-white/10
+              px-6 py-6
+              flex flex-col gap-5
+            "
           >
-            <div className="flex flex-col px-6 py-5 gap-4">
-              {navLinks.map((item) => (
+            {/* NORMAL LINKS */}
+            {navLinks.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                onClick={() => setOpen(false)}
+                className="text-white/80 uppercase text-sm"
+              >
+                {item.name}
+              </NavLink>
+            ))}
+
+            {/* GUEST */}
+            {!token && (
+              <NavLink
+                to="/login"
+                onClick={() => setOpen(false)}
+                className="text-orange-300 uppercase text-sm"
+              >
+                Login
+              </NavLink>
+            )}
+
+            {/* ADMIN */}
+            {token && role === "admin" && (
+              <>
                 <NavLink
-                  key={item.path}
-                  to={item.path}
+                  to="/admin"
                   onClick={() => setOpen(false)}
-                  className="text-white/80 uppercase text-sm"
+                  className="text-orange-300 uppercase text-sm"
                 >
-                  {item.name}
+                  Admin Panel
                 </NavLink>
-              ))}
 
-              {/* ADMIN MOBILE */}
-              {token && role === "admin" && (
-                <>
-                  <NavLink
-                    to="/admin"
-                    onClick={() => setOpen(false)}
-                    className="text-orange-300 uppercase text-sm"
-                  >
-                    Admin
-                  </NavLink>
-
-                  <NavLink
-                    to="/create-bill"
-                    onClick={() => setOpen(false)}
-                    className="text-orange-300 uppercase text-sm"
-                  >
-                    Create Bill
-                  </NavLink>
-                </>
-              )}
-
-              {/* AUTH */}
-              {!token ? (
-                <NavLink to="/login" onClick={() => setOpen(false)}>
-                  Login
+                <NavLink
+                  to="/create-bill"
+                  onClick={() => setOpen(false)}
+                  className="text-orange-300 uppercase text-sm"
+                >
+                  Create Bill
                 </NavLink>
-              ) : (
-                <button onClick={logout} className="text-red-400 text-left">
-                  Logout
-                </button>
-              )}
-            </div>
+              </>
+            )}
+
+            {/* LOGOUT */}
+            {token && (
+              <button
+                onClick={() => {
+                  logout();
+                  setOpen(false);
+                }}
+                className="text-red-400 uppercase text-sm text-left"
+              >
+                Logout
+              </button>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
