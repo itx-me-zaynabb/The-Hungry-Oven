@@ -8,14 +8,7 @@ An immersive modern restaurant web experience crafted with React, animation syst
 
 ---
 
-<p align="center">
-  <img src="https://img.shields.io/badge/React-Frontend-blue?style=for-the-badge&logo=react"/>
-  <img src="https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css"/>
-  <img src="https://img.shields.io/badge/Framer-Motion-black?style=for-the-badge&logo=framer"/>
-  <img src="https://img.shields.io/badge/Responsive-Design-success?style=for-the-badge"/>
-</p>
 
----
 
 # ✨ About The Project
 
@@ -86,32 +79,6 @@ This project was heavily focused on balancing:
 * Component reusability
 * UI consistency
 * Modern visual storytelling
-
----
-
-# 📸 Project Showcase
-
-## 🏠 Landing Experience
-
-(Add Screenshot Here)
-
----
-
-## 🍔 Interactive Food Menu
-
-(Add Screenshot Here)
-
----
-
-## 🛒 Dynamic Cart Functionality
-
-(Add Screenshot Here)
-
----
-
-## ✨ Cinematic UI Sections
-
-(Add Screenshot Here)
 
 ---
 
